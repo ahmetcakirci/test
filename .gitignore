@@ -1,0 +1,5 @@
+/logs/*
+!/logs/README.md
+/README.md
+/.idea
+/CONTRIBUTING.md
