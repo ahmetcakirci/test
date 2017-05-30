@@ -8,7 +8,12 @@ return [
         'renderer' => [
             'template_path' => __DIR__ . '/../templates/',
         ],
-
+        "db" => [
+            "host" => "localhost",
+            "dbname" => "usersdb",
+            "user" => "root",
+            "pass" => ""
+        ],
         // Monolog settings
         'logger' => [
             'name' => 'slim-app',

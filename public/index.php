@@ -1,30 +1,39 @@
-<?php
-if (PHP_SAPI == 'cli-server') {
-    // To help the built-in PHP dev server, check if the request was actually for
-    // something which should probably be served as a static file
-    $url  = parse_url($_SERVER['REQUEST_URI']);
-    $file = __DIR__ . $url['path'];
-    if (is_file($file)) {
-        return false;
-    }
-}
+<!DOCTYPE html>
+<html ng-app="apiApp">
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
 
-require __DIR__ . '/../vendor/autoload.php';
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</head>
+<body ng-controller="mainController">
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">SPA Angular Restful API with PHP Slim Framework</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#!/"><i class="fa fa-home"></i> Home</a></li>
+            <li ng-if="loginBtn"><a href="#!/login"><i class="fa fa-sign-in"></i>Login</a></li>
+            <li ng-if="userListBtn"><a href="#!/userlists"><i class="fa fa-user"></i>UserList</a></li>
+            <li ng-if="logoutBtn"><a href="#!/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+        </ul>
+    </div>
+</nav>
 
-session_start();
+<div class="jumbotron">
+    <div class="container">
+        <div class="col-xs-offset-2 col-xs-8">
+            <div ng-view></div>
+        </div>
+    </div>
+</div>
 
-// Instantiate the app
-$settings = require __DIR__ . '/../src/settings.php';
-$app = new \Slim\App($settings);
-
-// Set up dependencies
-require __DIR__ . '/../src/dependencies.php';
-
-// Register middleware
-require __DIR__ . '/../src/middleware.php';
-
-// Register routes
-require __DIR__ . '/../src/routes.php';
-
-// Run app
-$app->run();
+<footer class="text-center">
+    <p>Hasko SPA RESTFUL API</p>
+</footer>
+</body>
+</html>
